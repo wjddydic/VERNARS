@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FacesPlayer : MonoBehaviour {
 
-    float rotSpeed = 180f;
+    public float rotSpeed = 90f;
 
     Transform player;
 
@@ -12,7 +12,7 @@ public class FacesPlayer : MonoBehaviour {
 		if(player == null)
         {
             //enemy가 player 찾기
-            GameObject go = GameObject.Find("PlayerShip");
+            GameObject go = GameObject.FindWithTag ("Player");
 
             if(go != null)
             {
@@ -23,7 +23,7 @@ public class FacesPlayer : MonoBehaviour {
         if (player == null)
             return;
 
-        Vector3 dir = player.position = transform.position;
+        Vector3 dir = player.position - transform.position;
         dir.Normalize();
 
         float zAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg- 90;
