@@ -4,14 +4,42 @@ using UnityEngine;
 
 public class DamagedByCollision : MonoBehaviour {
 
-	void OnCollisionEnter2D()
+    public int health = 1;
+
+    float invulntimer = 0;
+    int correctLayer;
+    void Start ()
     {
-        Debug.Log("Collision!");
+        correctLayer = gameObject.layer;
     }
     void OnTriggerEnter2D()
     {
         Debug.Log("Trigger!");
 
+       
+            health--;
+            invulntimer = 1f;
+            gameObject.layer = 10;
+    }
+
+    void Update ()
+    {
+
+        invulntimer -= Time.deltaTime;
+        if(invulntimer <= 0)
+        {
+            gameObject.layer = correctLayer;
+        }
+
+        if(health <= 0)
+        {
+            Die();
+        }
+    }
+
+    void Die ()
+    {
+        Destroy(gameObject);
     }
 
 }
